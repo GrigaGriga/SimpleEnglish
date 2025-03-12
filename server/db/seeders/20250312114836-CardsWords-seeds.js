@@ -7,12 +7,15 @@ module.exports = {
       'Cards', [
         {
           title: 'Еда',
+          url:'https://img.freepik.com/premium-photo/food-table-autumn-food-assortment-top-view-free-space-your-text_187166-5580.jpg',
         },
         {
           title: 'Аэропорт',
+          url:'https://minio.nplus1.ru/app-images/160245/e80da31e04852135a4db44be84f2d70e.jpg',
         },
         {
           title: 'Знакомство',
+          url:'https://lim-english.com/uploads/images/all/img_articles_new/znakomstvo.jpg',
         }
       ],
       {},
