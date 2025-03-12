@@ -10,7 +10,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      solveUserId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -18,7 +18,7 @@ module.exports = {
           key: 'id',
         },
       },
-      wordId: {
+      solveWordId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

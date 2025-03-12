@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Solve extends Model {
     /**
@@ -9,18 +8,21 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({User, Word}) {
-      this.belongsTo(User, { foreingKey: 'userId' });
-      this.belongsTo(Word, { foreingKey: 'wordId' });
+    static associate({ User, Word }) {
+      this.belongsTo(User, { foreignKey: 'solveUserId' });
+      this.belongsTo(Word, { foreignKey: 'solveWordId' });
     }
   }
-  Solve.init({
-    userId: DataTypes.INTEGER,
-    wordId: DataTypes.INTEGER,
-    isDone: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'Solve',
-  });
+  Solve.init(
+    {
+      solveUserId: DataTypes.INTEGER,
+      solveWordId: DataTypes.INTEGER,
+      isDone: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: 'Solve',
+    },
+  );
   return Solve;
 };
