@@ -9,17 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ User, Card, Solve }) {
-      this.hasMany(Solve, { foreingKey: 'wordId' });
-      this.belongsTo(User, { foreingKey: 'wordId' });
-      this.belongsTo(Card, { foreingKey: 'cardId' });
+      this.belongsTo(User, { foreignKey: 'wordUserId' });
+      this.belongsTo(Card, { foreignKey: 'wordCardId' });
+      this.hasMany(Solve, { foreignKey: 'solveWordId' });
     }
   }
   Word.init(
     {
       eng: DataTypes.STRING,
       rus: DataTypes.STRING,
-      cardId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
+      wordCardId: DataTypes.INTEGER,
+      wordUserId: DataTypes.INTEGER,
     },
     {
       sequelize,
