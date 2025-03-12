@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ User, Card }) {
-      this.belongsTo(User, { foreingKey: 'userId' });
-      this.belongsTo(Card, { foreingKey: 'cardId' });
+      this.belongsTo(User, { foreignKey: 'statUserId' });
+      this.hasMany(Card, { foreignKey: 'statCardId' });
     }
   }
   Stat.init(
     {
-      userId: DataTypes.INTEGER,
-      cardId: DataTypes.INTEGER,
+      statUserId: DataTypes.INTEGER,
+      statCardId: DataTypes.INTEGER,
       countWords: DataTypes.INTEGER,
     },
     {
