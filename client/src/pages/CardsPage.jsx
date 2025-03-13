@@ -1,28 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import OneCard from '../widgets/OneCard/OneCard';
 import axiosInstance from '../shared/libs/axiosInstance';
 
 export default function CardsPage() {
   const [cards, setCards] = useState([]);
-  console.log('cards', cards)
+
   useEffect(() => {
     axiosInstance.get('/card')
       .then((res) => setCards(res.data))
       .catch((error) => console.error("Ошибка при получении карточек: ", error));
   }, []);
+
   return (
-    <Container style={{ marginTop: '100px' }}>
-      <Row>
+    <Container style={{ marginBottom: '180px', width:'100%' }}>
+      <Row className="justify-content-center mb-4">
+        <Col xs="auto">
+          <h1 style={{ textAlign: 'center', fontSize: '36px', fontWeight: 'bold' }}>Выберите тему</h1>
+        </Col>
+      </Row>
+
+      <Row className="g-4">
         {cards.map((card) => (
-          <Col key={card.id} style={{ marginBottom: '20px' }}>
-            <OneCard card={card} />
+          <Col key={card.id} lg={4} className="d-flex justify-content-center">
+            <Link to={`/cards/${card.id}`} style={{ textDecoration: 'none' }}>
+              <OneCard card={card} />
+            </Link>
           </Col>
         ))}
       </Row>
     </Container>
-  )
+  );
 }
