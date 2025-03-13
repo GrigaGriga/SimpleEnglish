@@ -1,13 +1,12 @@
 const { Solve, Sequelize } = require('../../../db/models');
-class SolveService {
+class SolveServices {
   // static getAllCrafts() {
   //   return Craft.findAll({ order: [['updatedAt', 'DESC']] });
   // }
 
-  static async addSolve({ title, desc, url, authorName, isSale }) {
-    if (!title || !desc || !url) throw new Error('Не все поля переданы');
-    const newCraft = await Solve.create({ title, desc, url, authorName, isSale });
-    return newCraft;
+  static async addSolve(wordId, userId) {
+    const solve = await Solve.create({ solveWordId: wordId, solveUserId: userId, isDone: true });
+    return solve;
   }
 
 //   static async getAllWordsByCard(cardId) {
@@ -34,4 +33,4 @@ class SolveService {
   // }
 }
 
-module.exports = SolveService;
+module.exports = SolveServices;

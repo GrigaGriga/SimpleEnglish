@@ -8,10 +8,10 @@ import Col from "react-bootstrap/Col";
 
 const WordsPage = ({user}) => {
   const [words, setWords] = useState([]);
-  const { id } = useParams();
-
+  const { cardId } = useParams();
+console.log(words)
   useEffect(() => {
-    axiosInstance.get(`/cards/${id}`).then((res) => setWords(res.data));
+    axiosInstance.get(`/words/${cardId}`).then((res) => setWords(res.data));
   }, []);
   return (
     <>
