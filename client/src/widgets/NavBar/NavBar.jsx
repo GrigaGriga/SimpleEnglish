@@ -28,7 +28,7 @@ export default function NavBar({ logoutHandler, user }) {
               alt="Bootstrap"
               style={{
                 width: "auto",
-                height: "60px",  // Сохраняются пропорции
+                height: "60px",
               }}
             />
           </a>
