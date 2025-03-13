@@ -18,7 +18,7 @@ console.log(words)
   const deleteFromUserWord = async(event, word) => {
     event.stopPropagation()
     try {
-      const res = await axiosInstance.post(`/solve/`, {wordId:word.id, userId:user.data.id});
+      const res = await axiosInstance.post(`/solve/`, {wordId:word.id, userId:user.data.id, cardId:word.wordCardId });
       if (res.status === 201) {
         console.log(11111, res)
         setWords((prev)=>prev.filter((el) => el.id !== word.id))
