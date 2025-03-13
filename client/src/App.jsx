@@ -17,7 +17,7 @@ function App() {
   const logoutHandler = async () => {
     axiosInstance.get("/auth/logout").then(() => {
       setUser({ status: "guest", data: null });
-      setAccessToken("");
+      
     });
 
   };
@@ -38,15 +38,23 @@ function App() {
     <>
       <Routes>
         <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
-          <Route path="/" element={<CardsPage />} />
+ <Route element={<ProtecteRouter isAllowed={user.status === 'logged'} redirectTo={'/login'}/>}>
           <Route path="/main" element={<CardsPage />} />
+           <Route path="/" element={<CardsPage />} />
           <Route path="/cards/:cardId" element={<WordsPage user={user} />} />
-          <Route path="/user" element={<UserPage user={user}/>} />
+<Route path="/user" element={<UserPage user={user}/>} />
+          </Route>
+
+  <Route element={<ProtecteRouter isAllowed={user.status !== 'logged'} redirectTo={'/'}/>}>
+
           <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
 
-        </Route>
-      </Routes>
+      
+          </Route>
+
+         </Route>
+    </Routes>
     </>
   );
 }

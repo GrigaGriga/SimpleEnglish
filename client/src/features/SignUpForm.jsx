@@ -6,6 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import UserValidate from '../entities/user/UserValidate';
 import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
 import { useNavigate } from 'react-router';
+import Container from 'react-bootstrap/esm/Container';
 
 export default function SignUpForm({setUser}) {
   const navigate = useNavigate();
@@ -25,11 +26,15 @@ export default function SignUpForm({setUser}) {
   };
   return (
     <>
-    <div color='rgb(255, 201, 201)
-'>
+    <Container style={{
+      backgroundColor: 'rgb(255, 201, 201)',
+      padding: '20px',
+      transition: "filter 0.3s ease",
+      borderRadius: '10px',
+    }}>
     <Form onSubmit={signUpHandler}>
       <InputGroup className="mb-3">
-        <InputGroup.Text id="inputGroup-sizing-sm">Name</InputGroup.Text>
+        <InputGroup.Text id="inputGroup-sizing-sm">Имя</InputGroup.Text>
         <Form.Control
           aria-label="Small"
           aria-describedby="inputGroup-sizing-sm"
@@ -51,7 +56,7 @@ export default function SignUpForm({setUser}) {
       </InputGroup>
       <br />
       <InputGroup>
-        <InputGroup.Text id="inputGroup-sizing-lg">Password</InputGroup.Text>
+        <InputGroup.Text id="inputGroup-sizing-lg">Пароль</InputGroup.Text>
         <Form.Control
           aria-label="Large"
           aria-describedby="inputGroup-sizing-sm"
@@ -62,7 +67,7 @@ export default function SignUpForm({setUser}) {
       <br />
       <InputGroup>
           <InputGroup.Text id="inputGroup-sizing-lg">
-            Repeat Password
+            Повтор пароля
           </InputGroup.Text>
           <Form.Control
             aria-label="Large"
@@ -72,10 +77,21 @@ export default function SignUpForm({setUser}) {
           />
         </InputGroup>
         <br />
-      <Button onClick={() => navigate('/login')}> Войти</Button>
-      <Button type="submit" onClick={()=> navigate('/')}> Зарегистрироваться</Button>
+      <Button style={{
+              backgroundColor: 'rgb(254, 236, 152)',
+              border: '2px solid black',
+              color: 'black',
+              margin: '5px',
+              transition: "filter 0.3s ease",
+            }} onClick={() => navigate('/login')}> Войти</Button>
+      <Button style={{
+              backgroundColor: 'rgb(254, 236, 152)',
+              border: '2px solid black',
+              color: 'black',
+              transition: "filter 0.3s ease",
+            }} type="submit" onClick={()=> navigate('/')}> Зарегистрироваться</Button>
     </Form>
-    </div>
+    </Container>
   </>
   )
 }
