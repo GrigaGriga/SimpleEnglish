@@ -15,7 +15,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/main" element={<CardsPage />} />
             <Route path="/" element={<p>123456789</p>} />
-        <Route path="/cards/:id" element={<WordsPage />} />
+        <Route path="/cards/:id" element={<WordsPage user={user}/>} />
               <Route path="/signup" element={<SignUpPage setUser={setUser}/>} />
      <Route path="/login" element={<LoginPage setUser={setUser}/>} />
      <Route path="*" element={<h1>No content</h1>} />

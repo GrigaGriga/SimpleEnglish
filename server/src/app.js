@@ -3,12 +3,10 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-// const adviceRouter = require('./routers/adviceRouter');
 const authRouter = require('./routers/authRouter');
-
 const wordsRouter = require('./routes/wordsRouter/wordsRouter');
+const solveRouter = require('./routes/SolveRouter/solveRouter');
 // const authRouter = require('./routers/authRouter');
-
 // const tokenRouter = require('./routers/tokenRouter');
 const corsConfig = require('./config/cors.config');
 
@@ -22,11 +20,9 @@ app.use(cookieParser());
 app.use(cors(corsConfig));
 
 
-// app.use('/api/advices', adviceRouter);
 app.use('/api/auth', authRouter);
-
 app.use('/api/cards', wordsRouter);
-// app.use('/api/auth', authRouter);
+app.use('/api/solve', solveRouter);
 
 // app.use('/api/tokens/', tokenRouter);
 
