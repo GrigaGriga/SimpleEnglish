@@ -3,6 +3,8 @@ import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import UserValidate from '../entities/user/UserValidate';
+import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
 
 export default function SignUpForm({setUser}) {
     const signUpHandler = (e) => {
@@ -10,11 +12,14 @@ export default function SignUpForm({setUser}) {
         const formData = Object.fromEntries(new FormData(e.target));
       
         
-        // if (!formData.email || !formData.password || !formData.name) {
-        //   return alert("Missing required fields");
-        // }
-        axios.post("/api/auth/signup", formData).then((res) => {
+        if (!formData.email || !formData.password || !formData.userName) {
+          return alert("Missing required fields");
+        }
+        const { isValid, error } = UserValidate.validateSignUp(formData);
+        if (!isValid) return alert(error);
+        axiosInstance.post("/auth/signup", formData).then((res) => {
           setUser({ status: "logged", data: res.data.user });
+          setAccessToken(res.data.accessToken);
         });
       };
   return (
@@ -52,6 +57,18 @@ export default function SignUpForm({setUser}) {
         />
       </InputGroup>
       <br />
+      <InputGroup>
+          <InputGroup.Text id="inputGroup-sizing-lg">
+            Repeat Password
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+            name="repeatPassword"
+            type="password"
+          />
+        </InputGroup>
+        <br />
       <Button type="submit"> Подтвердить</Button>
     </Form>
   </>
