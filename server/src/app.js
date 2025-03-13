@@ -11,6 +11,7 @@ const wordsRouter = require('./routes/wordsRouter/wordsRouter');
 
 // const tokenRouter = require('./routers/tokenRouter');
 const corsConfig = require('./config/cors.config');
+const tokensRouter = require('./routers/tokensRouter');
 
 const app = express();
 
@@ -28,6 +29,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/cards', wordsRouter);
 // app.use('/api/auth', authRouter);
 
-// app.use('/api/tokens/', tokenRouter);
+ app.use('/api/tokens/', tokensRouter);
 
 module.exports = app;

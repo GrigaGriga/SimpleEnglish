@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './App.css'
 import { Route, Routes } from 'react-router'
 import Layout from "./widgets/Layout/Layout";
@@ -7,6 +7,7 @@ import WordsPage from "./pages/WordsPage/WordsPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage"
 import axios from "axios";
+import axiosInstance, { setAccessToken } from "./shared/libs/axiosInstance";
 
 
 function App() {
@@ -16,6 +17,19 @@ function App() {
       .get("/api/auth/logout")
       .then(() => setUser({ status: "guest", data: null }));
   };
+  useEffect(() => {
+    axiosInstance("/tokens/refresh")
+      .then(({ data }) => {
+        setTimeout(() => {
+          setUser({ status: "logged", data: data.user });
+        }, 1000);
+        setAccessToken(data.accessToken);
+      })
+      .catch(() => {
+        setUser({ status: "guest", data: null });
+        setAccessToken("");
+      });
+  }, []);
   return (
     <>
       <Routes>
