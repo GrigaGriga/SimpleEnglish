@@ -1,4 +1,4 @@
-const { Word, Sequelize } = require('../../../db/models');
+const {Solve, Word, Sequelize } = require('../../../db/models');
 class WordsService {
   // static getAllCrafts() {
   //   return Craft.findAll({ order: [['updatedAt', 'DESC']] });
@@ -11,10 +11,33 @@ class WordsService {
   // }
 
   static async getAllWordsByCard(cardId) {
-    const words = await Word.findAll({ where: { wordCardId: cardId ,[Sequelize.Op.or]: [
-      { wordUserId: null },
-      { wordUserId: 1 }, // Замените anotherId на нужный ID
-    ], } });
+  //   const words = await Word.findAll({ where: { wordCardId: cardId ,[Sequelize.Op.or]: [
+  //     { wordUserId: null },
+  //     { wordUserId: 1 },
+  //   ], },
+  // include: {
+  //       model: Solve,
+  //       [Sequelize.Op.or]: [
+  //         { solveUserId: 1 },
+  //         { isDone: false },
+  //       ]
+  //     },
+  //    });
+  const words = await Word.findAll({
+    where: {
+      wordCardId: cardId,
+      [Sequelize.Op.or]: [{ wordUserId: null }, { wordUserId: 1 }],
+    },
+    include: [
+      {
+        model: Solve,
+        required: false, // Используем LEFT JOIN
+        where: {
+          id: { [Sequelize.Op.is]: null }, // Проверяем, что Solve не существует
+        },
+      },
+    ],
+  });
     return words
   }
 

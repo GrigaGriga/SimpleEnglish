@@ -24,7 +24,7 @@ app.use(cors(corsConfig));
 
 app.use('/api/auth', authRouter);
 // app.use('/api/card', cardsRouter)
-app.use('/api/cards', wordsRouter);
+app.use('/api/words', wordsRouter);
 app.use('/api/solve', solveRouter);
 
  app.use('/api/tokens/', tokensRouter);

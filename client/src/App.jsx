@@ -35,7 +35,7 @@ function App() {
         <Route element={<Layout user={user} logoutHandler={logoutHandler}/>}>
           <Route path="/main" element={<CardsPage />} />
             <Route path="/" element={<p>123456789</p>} />
-        <Route path="/cards/:id" element={<WordsPage user={user}/>} />
+        <Route path="/cards/:cardId" element={<WordsPage user={user}/>} />
               <Route path="/signup" element={<SignUpPage setUser={setUser}/>} />
      <Route path="/login" element={<LoginPage setUser={setUser}/>} />
      <Route path="*" element={<h1>No content</h1>} />

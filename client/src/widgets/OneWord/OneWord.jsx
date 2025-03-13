@@ -14,7 +14,8 @@ console.log(user)
     event.stopPropagation()
     try {
       const res = await axiosInstance.post(`/solve/`, {wordId:word.id, userId:1});
-      if (res.status === 204) {
+      if (res.status === 201) {
+        console.log(11111, res)
         // setCurrentAdvice((prev) => prev.filter((el) => el.id !== id));
       }
     } catch (error) {

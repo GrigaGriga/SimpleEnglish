@@ -4,8 +4,9 @@ const WordsService = require('../../services/WordsServices/WordsServices');
 // const checkId = require('../../middlewares/checkId');
 // const { verifyAccessToken } = require('../../middlewares/verifyTokens');
 
-wordsRouter.route('/:id').get(async (req, res) => {
-  const cardId = Number(req.params.id);
+wordsRouter.route('/:cardId').get(async (req, res) => {
+  const cardId = Number(req.params.cardId);
+  console.log(req.params)
   try {
     const wordsArr = await WordsService.getAllWordsByCard(cardId);
     // console.log(wordsArr.map(el=>el.get()));
