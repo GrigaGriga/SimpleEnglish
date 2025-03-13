@@ -9,14 +9,17 @@ import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage/UserPage";
 import axios from "axios";
 import axiosInstance, { setAccessToken } from "./shared/libs/axiosInstance";
+import ProtecteRouter from "./shared/hocs/ProtecteRouter";
 
 function App() {
   const [user, setUser] = useState({ status: "logging", data: null });
-  const logoutHandler = () => {
+
+  const logoutHandler = async () => {
     axiosInstance.get("/auth/logout").then(() => {
       setUser({ status: "guest", data: null });
       setAccessToken("");
     });
+
   };
   useEffect(() => {
     axiosInstance("/tokens/refresh")
@@ -41,7 +44,7 @@ function App() {
           <Route path="/user" element={<UserPage user={user}/>} />
           <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
-          <Route path="*" element={<h1>No content</h1>} />
+
         </Route>
       </Routes>
     </>

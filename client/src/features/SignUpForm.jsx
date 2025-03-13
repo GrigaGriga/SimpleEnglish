@@ -5,25 +5,28 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import UserValidate from '../entities/user/UserValidate';
 import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
+import { useNavigate } from 'react-router';
 
 export default function SignUpForm({setUser}) {
-    const signUpHandler = (e) => {
-        e.preventDefault();
-        const formData = Object.fromEntries(new FormData(e.target));
-      
-        
-        if (!formData.email || !formData.password || !formData.userName) {
-          return alert("Missing required fields");
-        }
-        const { isValid, error } = UserValidate.validateSignUp(formData);
-        if (!isValid) return alert(error);
-        axiosInstance.post("/auth/signup", formData).then((res) => {
-          setUser({ status: "logged", data: res.data.user });
-          setAccessToken(res.data.accessToken);
-        });
-      };
+  const navigate = useNavigate();
+  const signUpHandler = (e) => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.target));
+    if (!formData.email || !formData.password || !formData.userName) {
+      return alert("Missing required fields");
+    }
+    const { isValid, error } = UserValidate.validateSignUp(formData);
+    if (!isValid) return alert(error);
+    axiosInstance.post("/auth/signup", formData).then((res) => {
+      setUser({ status: "logged", data: res.data.userName });
+      setAccessToken(res.data.accessToken);
+      location.assign('/')
+    });
+  };
   return (
     <>
+    <div color='rgb(255, 201, 201)
+'>
     <Form onSubmit={signUpHandler}>
       <InputGroup className="mb-3">
         <InputGroup.Text id="inputGroup-sizing-sm">Name</InputGroup.Text>
@@ -69,8 +72,10 @@ export default function SignUpForm({setUser}) {
           />
         </InputGroup>
         <br />
-      <Button type="submit"> Подтвердить</Button>
+      <Button onClick={() => navigate('/login')}> Войти</Button>
+      <Button type="submit" onClick={()=> navigate('/')}> Зарегистрироваться</Button>
     </Form>
+    </div>
   </>
   )
 }
