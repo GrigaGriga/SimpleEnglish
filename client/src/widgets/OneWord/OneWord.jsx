@@ -3,25 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./FlippingCard.module.css";
 import axiosInstance from "../../shared/libs/axiosInstance";
 
-export default function OneWord({ word, user }) {
+export default function OneWord({ word, deleteFromUserWord}) {
   const [isFlipped, setIsFlipped] = useState(false);
-// console.log(user)
+
   const handleClick = () => {
     setIsFlipped(!isFlipped);
-  };
-
-  const deleteFromUserWord = async(event) => {
-    event.stopPropagation()
-    try {
-      const res = await axiosInstance.post(`/solve/`, {wordId:word.id, userId:user.data.id});
-      if (res.status === 201) {
-        console.log(11111, res)
-        // setCurrentAdvice((prev) => prev.filter((el) => el.id !== id));
-      }
-    } catch (error) {
-      console.log(error);
-      alert("Что-то пошло не так");
-    }
   };
 
   return (
@@ -38,7 +24,7 @@ export default function OneWord({ word, user }) {
             transition={{ duration: 0.5 }}
           >
             <div className={styles.cardContent}><div style={{marginBottom:'15px'}}>{word.rus}</div><button style={{backgroundColor:'rgb(255, 201, 201)'}} type="button" className="btn" onClick={(event) => {
-    deleteFromUserWord(event)}} >Изучено</button></div>
+    deleteFromUserWord(event, word)}} >Изучено</button></div>
             
           </motion.div>
         ) : (
