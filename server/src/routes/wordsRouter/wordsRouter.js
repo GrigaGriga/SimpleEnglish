@@ -1,14 +1,16 @@
 const wordsRouter = require('express').Router();
+const { verifyAccessToken } = require('../../middlewares/verifyTokens');
 const WordsService = require('../../services/WordsServices/WordsServices');
 // const { Word, Card } = require('../../../db/models');
 // const checkId = require('../../middlewares/checkId');
-// const { verifyAccessToken } = require('../../middlewares/verifyTokens');
 
-wordsRouter.route('/:cardId').get(async (req, res) => {
+wordsRouter.route('/:cardId').get(verifyAccessToken, async (req, res) => {
+  const { id: userId } = res.locals.user;
+  console.log(userId)
   const cardId = Number(req.params.cardId);
   console.log(req.params)
   try {
-    const wordsArr = await WordsService.getAllWordsByCard(cardId);
+    const wordsArr = await WordsService.getAllWordsByCard(cardId, userId);
     // console.log(wordsArr.map(el=>el.get()));
     res.json(wordsArr.map(el=>el.get()));
   } catch (error) {

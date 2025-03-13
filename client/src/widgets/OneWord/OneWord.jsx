@@ -5,7 +5,7 @@ import axiosInstance from "../../shared/libs/axiosInstance";
 
 export default function OneWord({ word, user }) {
   const [isFlipped, setIsFlipped] = useState(false);
-console.log(user)
+// console.log(user)
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
@@ -13,7 +13,7 @@ console.log(user)
   const deleteFromUserWord = async(event) => {
     event.stopPropagation()
     try {
-      const res = await axiosInstance.post(`/solve/`, {wordId:word.id, userId:1});
+      const res = await axiosInstance.post(`/solve/`, {wordId:word.id, userId:user.data.id});
       if (res.status === 201) {
         console.log(11111, res)
         // setCurrentAdvice((prev) => prev.filter((el) => el.id !== id));
