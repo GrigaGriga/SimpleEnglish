@@ -4,12 +4,12 @@ import { Outlet } from "react-router";
 import Container from "react-bootstrap/esm/Container";
 import Loader from "../../shared/hocs/Loader";
 
-export default function Layout({ logoutHandler, user }) {
+export default function Layout({user,logoutHandler}) {
   return (
     <>
       <Container fluid="md">
-        <Loader isLoading={user.status === "logging"}>
-          <NavBar logoutHandler={logoutHandler} user={user} />
+        <Loader>
+          <NavBar logoutHandler={logoutHandler} user={user}/>
           <Outlet />
         </Loader>
       </Container>

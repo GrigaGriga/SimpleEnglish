@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const jwtConfig = require('../configs/jwt.config');
+const jwtConfig = require('../config/jwt.config');
 
 const generateTokens = (payload) => ({
   accessToken: jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, jwtConfig.access),
