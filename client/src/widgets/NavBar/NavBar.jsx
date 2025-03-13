@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 export default function NavBar({ logoutHandler, user }) {
   console.log(user);
+  const navigate = useNavigate();
   return (
     <>
       <nav
@@ -66,7 +68,8 @@ export default function NavBar({ logoutHandler, user }) {
           </button>
         </div>
         <div style={{ display: "flex", alignItems: "center", paddingRight: '20px' }}>
-          <button onClick={logoutHandler}
+          <button onClick={user.status === "logged" ? ()=> logoutHandler().then(() => navigate('/login')) : 
+                () => navigate('/login')}
             style={{
               backgroundColor: 'rgb(254, 236, 152)',
               border: '2px solid black',
@@ -77,7 +80,7 @@ export default function NavBar({ logoutHandler, user }) {
             onMouseEnter={(e) => e.target.style.filter = 'brightness(1.2)'}
             onMouseLeave={(e) => e.target.style.filter = 'brightness(1)'}
           >
-            Выйти
+            {user.status === "logged" ? 'Выход' : "Войти"}
           </button>
         </div>
       </nav>
