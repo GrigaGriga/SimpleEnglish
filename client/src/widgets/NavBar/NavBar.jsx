@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 export default function NavBar({ logoutHandler, user }) {
-  console.log(user);
+  // console.log(user);
+  const navigate = useNavigate();
   return (
     <>
       <nav
@@ -33,6 +35,7 @@ export default function NavBar({ logoutHandler, user }) {
             />
           </a>
           <button
+          onClick={()=>navigate('/user')}
             style={{
               backgroundColor: 'rgb(254, 236, 152)',
               border: '2px solid black',
@@ -49,6 +52,7 @@ export default function NavBar({ logoutHandler, user }) {
         </div>
         <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
           <button
+          onClick={()=>navigate('/main')}
             style={{
               backgroundColor: 'rgb(254, 236, 152)',
               border: '2px solid black',
