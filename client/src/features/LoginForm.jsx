@@ -4,9 +4,12 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
+import { useNavigate } from 'react-router';
+
 
 export default function LoginForm({setUser}) {
-    const loginHandler = (e) => {
+  const navigate = useNavigate();
+    const loginHandler =  (e) => {
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.target));
         if (!formData.email || !formData.password) {
@@ -17,6 +20,8 @@ export default function LoginForm({setUser}) {
           setAccessToken(res.data.accessToken);
         });
       };
+
+      
   return (
     <Form onSubmit={loginHandler}>
     <InputGroup className="mb-3">
@@ -39,7 +44,8 @@ export default function LoginForm({setUser}) {
       />
     </InputGroup>
     <br />
-    <Button type="submit"> Подтвердить</Button>
+    <Button onClick={()=> navigate('/signup')}>Зарегистрироваться</Button>
+    <Button type="submit" onClick={()=> navigate('/')}> Войти</Button>
   </Form>
   )
 }
