@@ -1,4 +1,4 @@
-const { Word } = require('../../../db/models');
+const { Word, Sequelize } = require('../../../db/models');
 class WordsService {
   // static getAllCrafts() {
   //   return Craft.findAll({ order: [['updatedAt', 'DESC']] });
@@ -10,8 +10,11 @@ class WordsService {
   //   return newCraft;
   // }
 
-  static async getAllWordsByCard(id) {
-    const words = await Word.findAll({ where: { wordCardId: id } });
+  static async getAllWordsByCard(cardId) {
+    const words = await Word.findAll({ where: { wordCardId: cardId ,[Sequelize.Op.or]: [
+      { wordUserId: null },
+      { wordUserId: 1 }, // Замените anotherId на нужный ID
+    ], } });
     return words
   }
 

@@ -5,9 +5,9 @@ const WordsService = require('../../services/WordsServices/WordsServices');
 // const { verifyAccessToken } = require('../../middlewares/verifyTokens');
 
 wordsRouter.route('/:id').get(async (req, res) => {
-  const id = Number(req.params.id);
+  const cardId = Number(req.params.id);
   try {
-    const wordsArr = await WordsService.getAllWordsByCard(id);
+    const wordsArr = await WordsService.getAllWordsByCard(cardId);
     // console.log(wordsArr.map(el=>el.get()));
     res.json(wordsArr.map(el=>el.get()));
   } catch (error) {

@@ -8,7 +8,6 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage"
 import axios from "axios";
 
-
 function App() {
   const [user, setUser] = useState({ status: "logging", data: null });
   const logoutHandler = () => {
@@ -22,7 +21,7 @@ function App() {
         <Route element={<Layout user={user} logoutHandler={logoutHandler}/>}>
           <Route path="/main" element={<CardsPage />} />
             <Route path="/" element={<p>123456789</p>} />
-        <Route path="/cards/:id" element={<WordsPage />} />
+        <Route path="/cards/:id" element={<WordsPage user={user}/>} />
               <Route path="/signup" element={<SignUpPage setUser={setUser}/>} />
      <Route path="/login" element={<LoginPage setUser={setUser}/>} />
      <Route path="*" element={<h1>No content</h1>} />
