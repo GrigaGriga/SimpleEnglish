@@ -56,7 +56,7 @@ export default function NavBar({ logoutHandler, user }) {
               border: '2px solid black',
               paddingRight: '80px',
               paddingLeft: '80px',
-              marginRight: '85px',
+              marginRight: '45px',
               transition: "filter 0.3s ease",
             }}
             type="button"

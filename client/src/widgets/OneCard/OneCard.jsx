@@ -8,19 +8,36 @@ export default function OneCard({ card }) {
           backgroundColor: 'rgb(255, 201, 201)',
           borderRadius: '15px',
           overflow: 'hidden',
-          // width:'px',
-          // height:'px',
+          width: '380px',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
         }}
         className="card"
       >
         <img
           src={card.url}
           className="card-img"
-          alt="..."
-          style={{ width: '307px', height: '150px' }}
+          alt="Картинка темы"
+          style={{
+            width: '100%',
+            height: '200px',
+            objectFit: 'cover',
+            borderRadius: '15px',
+            border: '3px solid black',
+          }}
         />
-        <div className="card-img-overlay">
-          <h5 className="card-title">{card.title}</h5>
+        <div
+          style={{
+            color: 'black',
+            textAlign: 'center',
+            padding: '10px',
+            flexShrink: 0,
+          }}
+        >
+          <h5 style={{ marginBottom: '0px', fontSize: '30px' }} className="card-title">
+            {card.title}
+          </h5>
         </div>
       </div>
     </>
