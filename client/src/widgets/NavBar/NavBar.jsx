@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function NavBar() {
+export default function NavBar({ logoutHandler, user }) {
+  console.log(user);
   return (
     <>
       <nav
@@ -43,7 +44,7 @@ export default function NavBar() {
             onMouseEnter={(e) => e.target.style.filter = 'brightness(1.2)'}
             onMouseLeave={(e) => e.target.style.filter = 'brightness(1)'}
           >
-            User
+            {user.status === "logged" ? user.data.userName : "Guest"}
           </button>
         </div>
         <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
@@ -65,7 +66,7 @@ export default function NavBar() {
           </button>
         </div>
         <div style={{ display: "flex", alignItems: "center", paddingRight: '20px' }}>
-          <button
+          <button onClick={logoutHandler}
             style={{
               backgroundColor: 'rgb(254, 236, 152)',
               border: '2px solid black',
