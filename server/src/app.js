@@ -7,7 +7,7 @@ const authRouter = require('./routers/authRouter');
 const wordsRouter = require('./routes/wordsRouter/wordsRouter');
 const solveRouter = require('./routes/SolveRouter/solveRouter');
 // const authRouter = require('./routers/authRouter');
-// const cardsRouter = require('./routers/cardsRouter')
+const cardsRouter = require('./routers/cardsRouter')
 // const tokenRouter = require('./routers/tokenRouter');
 const corsConfig = require('./config/cors.config');
 
@@ -22,7 +22,7 @@ app.use(cors(corsConfig));
 
 
 app.use('/api/auth', authRouter);
-// app.use('/api/card', cardsRouter)
+app.use('/api/card', cardsRouter)
 app.use('/api/cards', wordsRouter);
 app.use('/api/solve', solveRouter);
 

@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ User, Word }) {
-      this.belongsTo(User, { foreignKey: 'solveUserId' });
-      this.belongsTo(Word, { foreignKey: 'solveWordId' });
+      // this.belongsTo(User, { foreignKey: 'solveUserId' });
+      // this.belongsTo(Word, { foreignKey: 'solveWordId' });
     }
   }
   Solve.init(
