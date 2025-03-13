@@ -11,8 +11,7 @@ wordsRouter.route('/:cardId').get(verifyAccessToken, async (req, res) => {
   console.log(req.params)
   try {
     const wordsArr = await WordsService.getAllWordsByCard(cardId, userId);
-    // console.log(wordsArr.map(el=>el.get()));
-    res.json(wordsArr.map(el=>el.get()));
+    res.json(wordsArr);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Ошибка сервера' });

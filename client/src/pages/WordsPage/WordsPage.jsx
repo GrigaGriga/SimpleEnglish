@@ -10,16 +10,31 @@ const WordsPage = ({user}) => {
   const [words, setWords] = useState([]);
   const { cardId } = useParams();
 console.log(words)
+
   useEffect(() => {
     axiosInstance.get(`/words/${cardId}`).then((res) => setWords(res.data));
   }, []);
+
+  const deleteFromUserWord = async(event, word) => {
+    event.stopPropagation()
+    try {
+      const res = await axiosInstance.post(`/solve/`, {wordId:word.id, userId:user.data.id});
+      if (res.status === 201) {
+        console.log(11111, res)
+        setWords((prev)=>prev.filter((el) => el.id !== word.id))
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Что-то пошло не так");
+    }
+  };
   return (
     <>
       <Container style={{marginTop:'100px'}}>
         <Row>
           {words.map((el) => (
             <Col style={{marginBottom: '20px',}} key={el.id}>
-              <OneWord word={el} user={user}></OneWord>
+              <OneWord word={el} deleteFromUserWord={deleteFromUserWord}></OneWord>
             </Col>
           ))}
         </Row>
