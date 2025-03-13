@@ -11,36 +11,31 @@ class WordsService {
   // }
 
   static async getAllWordsByCard(cardId, userId) {
-    //   const words = await Word.findAll({ where: { wordCardId: cardId ,[Sequelize.Op.or]: [
-    //     { wordUserId: null },
-    //     { wordUserId: userId },
-    //   ], },
-    // include: {
-    //       model: Solve,
-    //       [Sequelize.Op.or]: [
-    //         { solveUserId: 1 },
-    //         { isDone: false },
-    //       ]
-    //     },
-    //    });
-
     const words = await Word.findAll({
       where: {
         wordCardId: cardId,
         [Sequelize.Op.or]: [{ wordUserId: null }, { wordUserId: userId }],
       },
-      include: [
-        {
-          model: Solve,
-          required: false, // Используем LEFT JOIN
-          where: {
-            solveWordId: { [Sequelize.Op.is]: null }, // Проверяем, что Solve не существует
-          },
-        },
-      ],
     });
 
-    return words;
+    const solves = await Solve.findAll({
+      where: {
+        solveUserId: userId,
+      },
+    });
+
+    const newWords = words.map((el) => el.get());
+    const newSolves = solves.map((el) => el.get());
+    // console.log('words', newWords);
+    // console.log('solves', newSolves);
+
+      let newArr=[...newWords]
+    for (let i = 0; i < newSolves.length; i++) {
+      newArr = newArr.filter((word) => word.id !== newSolves[i].solveWordId);
+    }
+    // console.log(3333333, newArr);
+    // console.log(4444444, words);
+    return newArr;
   }
 
   // static async deleteCraft(id) {
