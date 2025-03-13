@@ -1,6 +1,6 @@
 export default class UserValidate {
-  static validateSignUp({ name, email, password, repeatPassword }) {
-    if (!name || name.trim().length === 0) {
+  static validateSignUp({ userName, email, password, repeatPassword }) {
+    if (!userName || userName.trim().length === 0) {
       return {
         isValid: false,
         error: "Введите имя пользователя",

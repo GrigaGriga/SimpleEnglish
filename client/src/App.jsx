@@ -6,13 +6,20 @@ import CardsPage from "./pages/CardsPage";
 import WordsPage from "./pages/WordsPage/WordsPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage"
+import axios from "axios";
+
 
 function App() {
   const [user, setUser] = useState({ status: "logging", data: null });
+  const logoutHandler = () => {
+    axios
+      .get("/api/auth/logout")
+      .then(() => setUser({ status: "guest", data: null }));
+  };
   return (
     <>
       <Routes>
-        <Route element={<Layout />}>
+        <Route element={<Layout user={user} logoutHandler={logoutHandler}/>}>
           <Route path="/main" element={<CardsPage />} />
             <Route path="/" element={<p>123456789</p>} />
         <Route path="/cards/:id" element={<WordsPage />} />

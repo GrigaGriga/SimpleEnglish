@@ -3,6 +3,7 @@ import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
 
 export default function LoginForm({setUser}) {
     const loginHandler = (e) => {
@@ -11,8 +12,9 @@ export default function LoginForm({setUser}) {
         if (!formData.email || !formData.password) {
           return alert("Missing required fields");
         }
-        axios.post("/api/auth/login", formData).then((res) => {
+        axiosInstance.post("/auth/login", formData).then((res) => {
           setUser({ status: "logged", data: res.data.user });
+          setAccessToken(res.data.accessToken);
         });
       };
   return (
