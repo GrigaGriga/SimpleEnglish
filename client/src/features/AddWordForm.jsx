@@ -105,10 +105,24 @@ export default function AddWordForm() {
       {showErr ? <><br /><div style={{color: 'red'}}>Не все поля заполнены</div><br /></> : <br />}
       <Row>
           <Col>
-          <Button type="submit">Добавить слово</Button>
+          <Button style={{
+              backgroundColor: 'rgb(254, 236, 152)',
+              border: '2px solid black',
+              marginLeft: "20px",
+              transition: "filter 0.3s ease",
+              color:'black'
+            }}
+             type="submit">Добавить слово</Button>
           </Col>
           <Col >
-          <Button onClick={()=>navigate('/user/words')}>Добавленные слова</Button>
+          <Button 
+          style={{
+              backgroundColor: 'rgb(254, 236, 152)',
+              border: '2px solid black',
+              marginLeft: "20px",
+              transition: "filter 0.3s ease",
+              color:'black'
+            }} onClick={()=>navigate('/user/words')}>Добавленные слова</Button>
           </Col>
         </Row>
     </Form>
