@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axiosInstance, { setAccessToken } from "../../shared/libs/axiosInstance";
 import OneWord from "../../widgets/OneWord/OneWord";
 import Container from "react-bootstrap/Container";
@@ -7,13 +7,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const WordsPage = ({user}) => {
+  const navigate = useNavigate();
   const [words, setWords] = useState([]);
   const { cardId } = useParams();
 console.log(words)
 
   useEffect(() => {
-    axiosInstance.get(`/words/${cardId}`).then((res) => setWords(res.data));
+    axiosInstance.get(`/words/${cardId}`).then((res) => setWords(res.data)).catch(console.log)
   }, []);
+
+  if(words.length===0){
+    navigate('/main')
+  }
 
   const deleteFromUserWord = async(event, word) => {
     event.stopPropagation()

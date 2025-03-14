@@ -22,14 +22,19 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const prevRequest = error.config;
-    if (error.response.status === 403 && !prevRequest.sent) {
-      const response = await axiosInstance("/tokens/refresh");
-      accessToken = response.data.accessToken;
-      prevRequest.sent = true;
-      prevRequest.headers.Authorization = `Bearer ${accessToken}`;
-      return axiosInstance(prevRequest);
+    try {
+      if (error.response.status === 403 && !prevRequest.sent) {
+        const response = await axiosInstance("/tokens/refresh");
+        accessToken = response.data.accessToken;
+        prevRequest.sent = true;
+        prevRequest.headers.Authorization = `Bearer ${accessToken}`;
+        return axiosInstance(prevRequest);
+      }
+      return Promise.reject(error);
+    } catch (error) {
+      console.log(error)
     }
-    return Promise.reject(error);
+    
   }
 );
 

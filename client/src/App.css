@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+body{
+  background-image: url('https://bogatyr.club/uploads/posts/2023-02/1677485747_bogatyr-club-p-fon-shkolnii-svetlii-fon-pinterest-31.png');
+  background-size: cover;
+}
+
+
 .logo {
   height: 6em;
   padding: 1.5em;

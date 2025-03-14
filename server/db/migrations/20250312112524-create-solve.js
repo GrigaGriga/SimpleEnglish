@@ -25,6 +25,7 @@ module.exports = {
           model: 'Words',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       isDone: {
         type: Sequelize.BOOLEAN,
