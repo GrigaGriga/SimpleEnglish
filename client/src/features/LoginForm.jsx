@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
@@ -8,8 +8,13 @@ import { useNavigate } from 'react-router';
 import Container from 'react-bootstrap/esm/Container';
 
 
-export default function LoginForm({setUser}) {
+export default function LoginForm({setUser, user}) {
+const [input, setInput] = useState({email:'', password:''})
+const [show, setShow] = useState(false);
+
+
   const navigate = useNavigate();
+
     const loginHandler =  (e) => {
         e.preventDefault();
         const formData = Object.fromEntries(new FormData(e.target));
@@ -19,9 +24,14 @@ export default function LoginForm({setUser}) {
         axiosInstance.post("/auth/login", formData).then((res) => {
           setUser({ status: "logged", data: res.data.user });
           setAccessToken(res.data.accessToken);
-        }).catch(console.log);
+        })
+          navigate("/");
+  })
+  .catch((err) => {
+    setShow(true);
+    console.error(err);
+        });
       };
-
       
   return (
     <Container style={{
@@ -30,6 +40,7 @@ export default function LoginForm({setUser}) {
       transition: "filter 0.3s ease",
       borderRadius: '10px',
     }}>
+      <h2>Вход</h2>
     <Form onSubmit={loginHandler}>
     <InputGroup className="mb-3">
       <InputGroup.Text id="inputGroup-sizing-default">Email</InputGroup.Text>
@@ -38,6 +49,9 @@ export default function LoginForm({setUser}) {
         aria-describedby="inputGroup-sizing-default"
         name="email"
         type="email"
+        value={input.email}
+        onChange={(e) => setInput({ ...input, email: e.target.value })}
+
       />
     </InputGroup>
     <br />
@@ -48,8 +62,13 @@ export default function LoginForm({setUser}) {
         aria-describedby="inputGroup-sizing-sm"
         name="password"
         type="password"
+        value={input.password}
+        onChange={(e) => setInput({ ...input, password: e.target.value })}
+
       />
     </InputGroup>
+    {show && <div style={{ color:'red',fontSize: '13px', marginTop: '2px'
+}}>Неверный пароль или email</div>}
     <br />
     <Button style={{
               backgroundColor: 'rgb(254, 236, 152)',
@@ -63,7 +82,7 @@ export default function LoginForm({setUser}) {
               border: '2px solid black',
               color: 'black',
               transition: "filter 0.3s ease",
-            }} type="submit" onClick={()=> navigate('/')}> Войти</Button>
+            }} type="submit" > Войти</Button>
   </Form>
   </Container>
   )
