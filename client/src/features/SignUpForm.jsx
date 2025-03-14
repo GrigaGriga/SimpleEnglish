@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
@@ -8,9 +8,20 @@ import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
 import { useNavigate } from 'react-router';
 import Container from 'react-bootstrap/esm/Container';
 
-export default function SignUpForm({setUser, user}) {
-  const 
+export default function SignUpForm({setUser,user}) {
   const navigate = useNavigate();
+  const [input,setInput] = useState({userName:'', email:'', password:'',repeatPassword:''})
+   const [show, setShow] = useState(false);
+   const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
+  const changeHandler = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if ((input.password.length < 6) && (input.repeatPassword !== input.password)) {
+      setShow(true) 
+    } else {setShow(false)}
+  }
+
   const signUpHandler = (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target));
@@ -24,15 +35,21 @@ export default function SignUpForm({setUser, user}) {
       setAccessToken(res.data.accessToken);
       location.assign('/')
     });
+    if (!pattern.test(input.email)) {
+      setShow(true)
+    }
   };
+
   return (
-    <>
+    < >
+    
     <Container style={{
       backgroundColor: 'rgb(255, 201, 201)',
       padding: '20px',
       transition: "filter 0.3s ease",
       borderRadius: '10px',
     }}>
+      <h2>Регистрация</h2>
     <Form onSubmit={signUpHandler}>
       <InputGroup className="mb-3">
         <InputGroup.Text id="inputGroup-sizing-sm">Имя</InputGroup.Text>
@@ -41,6 +58,8 @@ export default function SignUpForm({setUser, user}) {
           aria-describedby="inputGroup-sizing-sm"
           name="userName"
           type="text"
+          value={input.userName}
+          onChange={changeHandler}
         />
       </InputGroup>
       <br />
@@ -53,6 +72,8 @@ export default function SignUpForm({setUser, user}) {
           aria-describedby="inputGroup-sizing-default"
           name="email"
           type="email"
+          value={input.email}
+          onChange={changeHandler}
         />
       </InputGroup>
       <br />
@@ -63,8 +84,12 @@ export default function SignUpForm({setUser, user}) {
           aria-describedby="inputGroup-sizing-sm"
           name="password"
           type="password"
+          value={input.password}
+          onChange={changeHandler}
         />
       </InputGroup>
+      {show && <div style={{ color:'red',fontSize: '13px', marginTop: '2px'
+}}>Пароль не менее 6 символов</div>}
       <br />
       <InputGroup>
           <InputGroup.Text id="inputGroup-sizing-lg">
@@ -75,8 +100,12 @@ export default function SignUpForm({setUser, user}) {
             aria-describedby="inputGroup-sizing-sm"
             name="repeatPassword"
             type="password"
+            value={input.repeatPassword}
+            onChange={changeHandler}
           />
         </InputGroup>
+        {show && <div style={{ color:'red',fontSize: '13px', marginTop: '2px'
+}}>Пароли не совпадают</div>}
         <br />
       <Button style={{
               backgroundColor: 'rgb(254, 236, 152)',
@@ -93,6 +122,7 @@ export default function SignUpForm({setUser, user}) {
             }} type="submit" onClick={user.status === "logged" ? ()=> navigate('/') : ()=> navigate('/signup')}> Зарегистрироваться</Button>
     </Form>
     </Container>
+    
   </>
   )
 }

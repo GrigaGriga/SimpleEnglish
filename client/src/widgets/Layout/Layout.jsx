@@ -8,7 +8,7 @@ export default function Layout({user,logoutHandler}) {
   return (
     <>
       <Container fluid="md">
-        <Loader>
+        <Loader isLoading={user.status === 'logging'}>
           <NavBar logoutHandler={logoutHandler} user={user}/>
           <Outlet />
         </Loader>

@@ -11,6 +11,7 @@ import axios from "axios";
 import axiosInstance, { setAccessToken } from "./shared/libs/axiosInstance";
 import ProtecteRouter from "./shared/hocs/ProtecteRouter";
 
+
 function App() {
   const [user, setUser] = useState({ status: "logging", data: null });
 
@@ -48,14 +49,14 @@ function App() {
   <Route element={<ProtecteRouter isAllowed={user.status !== 'logged'} redirectTo={'/'}/>}>
 
           <Route path="/signup" element={<SignUpPage setUser={setUser} user={user}/>} />
-          <Route path="/login" element={<LoginPage setUser={setUser} />} />
+          <Route path="/login" element={<LoginPage setUser={setUser} user={user}/>} />
 
       
           </Route>
 
          </Route>
     </Routes>
-    </>
+    </ >
   );
 }
 
