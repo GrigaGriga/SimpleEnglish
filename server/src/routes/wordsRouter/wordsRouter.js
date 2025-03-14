@@ -20,7 +20,7 @@ wordsRouter.route('/').post(verifyAccessToken, async (req, res) => {
   const { id: userId } = res.locals.user;
   const {cardTitle, url, eng, rus} = req.body
   try {
-    const [card, created] = await WordsService.getOrCreateCard(cardTitle, url);
+    const card = await WordsService.getOrCreateCard(cardTitle, url);
     const cardId = card.get().id
     const newWord = await WordsService.addWord(cardId, eng, rus,userId );
     console.log(newWord)
