@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const path = require('path');
 
 const authRouter = require('./routers/authRouter');
 const wordsRouter = require('./routes/wordsRouter/wordsRouter');
@@ -10,7 +11,7 @@ const cardsRouter = require('./routers/cardsRouter');
 const corsConfig = require('./config/cors.config');
 const tokensRouter = require('./routers/tokensRouter');
 const statsRouter = require('./routes/StatsRouter/statsRouter');
-const userRouter = require('./routes/UserRouter/UserRouter');
+const userRouter = require('./routes/UserRouter/userRouter');
 
 const app = express();
 
@@ -28,5 +29,10 @@ app.use('/api/solve', solveRouter);
 app.use('/api/stats', statsRouter);
 app.use('/api/user', userRouter);
 app.use('/api/tokens/', tokensRouter);
+
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+});
 
 module.exports = app;
