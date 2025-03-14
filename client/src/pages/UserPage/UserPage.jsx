@@ -19,13 +19,20 @@ export default function UserPage({user}) {
     <>
       <Container>
         <Row>
+        
             <Col >
+            <h2>Статистика</h2>
+            <br />
+            <br />
             {stats.map(stat=> 
               <Stats Key={stat.id} stat={stat}/>
             )}
               
             </Col>
             <Col >
+            <h2>Добавление слов</h2>
+            <br />
+            <br />
               <AddWordForm />
             </Col>
         </Row>
