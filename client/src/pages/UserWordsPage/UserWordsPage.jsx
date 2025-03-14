@@ -7,7 +7,7 @@ export default function UserWordsPage({ user }) {
   const [words, setWords] = useState([]);
   // console.log(words)
   useEffect(() => {
-    axiosInstance.get(`/user/word`).then((res) => setWords(res.data));
+    axiosInstance.get(`/user/word`).then((res) => setWords(res.data)).catch(console.log)
   }, []);
 
   return (

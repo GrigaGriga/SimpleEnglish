@@ -19,7 +19,7 @@ export default function LoginForm({setUser}) {
         axiosInstance.post("/auth/login", formData).then((res) => {
           setUser({ status: "logged", data: res.data.user });
           setAccessToken(res.data.accessToken);
-        });
+        }).catch(console.log);
       };
 
       

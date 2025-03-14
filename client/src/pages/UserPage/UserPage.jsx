@@ -17,15 +17,26 @@ export default function UserPage({ user }) {
     <>
       <Container>
         <Row>
-          <Col >
+          <Col style={{ marginRight: "50px", marginBottom:'50px' }}>
             <h2>Статистика</h2>
-            <br />
-            <br />
-            {stats.map((stat) => (
-              <Stats key={stat.id} stat={stat} />
-            ))}
+            {stats.length > 0 ? (
+              <>
+                {stats.map((stat) => (
+                  <Stats
+                    style={{ marginRight: "0px" }}
+                    key={stat.id}
+                    stat={stat}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
+                <br />
+                <h4>Ничего не изучено</h4>
+              </>
+            )}
           </Col>
-          <Col >
+          <Col style={{ marginLeft: "50px" }}>
             <h2>Добавление слов</h2>
             <br />
             <br />

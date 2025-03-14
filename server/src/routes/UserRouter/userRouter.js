@@ -5,7 +5,6 @@ const checkId = require('../../middlewares/checkId');
 
 userRouter.route('/word').get(verifyAccessToken, async (req, res) => {
   const { id: userId } = res.locals.user;
-  // console.log(userId);
   try {
     const wordsArr = await UserService.getUserWords(userId);
     console.log(wordsArr);
