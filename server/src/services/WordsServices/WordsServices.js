@@ -1,14 +1,18 @@
-const { Solve, Word, Sequelize } = require('../../../db/models');
+const { Card, Solve, Word, Sequelize } = require('../../../db/models');
 class WordsService {
-  // static getAllCrafts() {
-  //   return Craft.findAll({ order: [['updatedAt', 'DESC']] });
-  // }
 
-  // static async addCraft({ title, desc, url, authorName, isSale }) {
-  //   if (!title || !desc || !url) throw new Error('Не все поля переданы');
-  //   const newCraft = await Craft.create({ title, desc, url, authorName, isSale });
-  //   return newCraft;
-  // }
+  static getOrCreateCard(cardTitle, url) {
+    return Card.findOrCreate({
+      where: { title: cardTitle},
+      defaults: { url }
+    });
+  }
+
+  static async addWord(cardId, eng, rus,userId ) {
+    if (!cardId || !eng || !rus) throw new Error('Не все поля переданы');
+    const newWord = await Word.create({ eng,rus,wordCardId: cardId, wordUserId: userId});
+    return newWord;
+  }
 
   static async getAllWordsByCard(cardId, userId) {
     const words = await Word.findAll({
