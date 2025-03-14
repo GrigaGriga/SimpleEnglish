@@ -9,8 +9,8 @@ export default function Stats({ stat }) {
   const perscent = Math.round((stat.countWords / stat.Card.Words.length) * 100);
   return (
     <>
-      <Container >
-        <Row style={{ width: "100%"}}>
+      <Container style={{ minWwidth: "300px", height: "10px" }}>
+        <Row style={{ width: "100%" }}>
           <Col style={{ width: "200px" }}>
             <div style={{ textAlign: "center" }}>{stat.Card.title}</div>
           </Col>

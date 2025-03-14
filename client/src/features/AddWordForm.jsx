@@ -27,7 +27,7 @@ export default function AddWordForm() {
       setShow(false)
       setShowAdded(true)
       // alert("Слово добавлено");
-    });
+    }).catch(console.log);
   };
 
   const changeHandler = (event) => {

@@ -1,38 +1,45 @@
-const { Stat,Card,Word } = require('../../../db/models');
+const { Stat, Card, Word } = require('../../../db/models');
 class StatsService {
   static async getStats(userId) {
-    const stats = await Stat.findAll({
-      where: {
-        statUserId: userId,
-      },
-      include: {
-        model: Card,
-        include: {
-          model: Word,
+    try {
+      const stats = await Stat.findAll({
+        where: {
+          statUserId: userId,
         },
-      },
-    });
-    // console.log(111, stats);
-    return stats;
+        include: {
+          model: Card,
+          include: {
+            model: Word,
+          },
+        },
+      });
+      return stats;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   static async addStat(cardId, userId) {
-    const stat = await Stat.findOne({
-      where: { statCardId: cardId, statUserId: userId },
-    });
-    // console.log(123, stat);
-    if (stat) {
-      const editStat = await Stat.update({ countWords: stat.countWords+1 }, { where: { id: stat.id } });
-      // console.log('editStat', editStat);
-      return editStat;
+    try {
+      const stat = await Stat.findOne({
+        where: { statCardId: cardId, statUserId: userId },
+      });
+      if (stat) {
+        const editStat = await Stat.update(
+          { countWords: stat.countWords + 1 },
+          { where: { id: stat.id } },
+        );
+        return editStat;
+      }
+      const newStat = await Stat.create({
+        statCardId: cardId,
+        statUserId: userId,
+        countWords: 1,
+      });
+      return newStat;
+    } catch (error) {
+      console.log(error);
     }
-    const newStat = await Stat.create({
-      statCardId: cardId,
-      statUserId: userId,
-      countWords: 1,
-    });
-    // console.log('newStat', newStat);
-    return newStat;
   }
 }
 

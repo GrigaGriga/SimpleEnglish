@@ -19,7 +19,7 @@ function App() {
   const logoutHandler = async () => {
     axiosInstance.get("/auth/logout").then(() => {
       setUser({ status: "guest", data: null });
-    });
+    }).catch(console.log);
   };
   useEffect(() => {
     axiosInstance("/tokens/refresh")

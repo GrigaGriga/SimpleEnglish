@@ -1,8 +1,6 @@
 const solveRouter = require('express').Router();
 const SolveServices = require('../../services/SolveServices/SolveServices');
 const StatsService = require('../../services/StatsServices/StatsServices');
-// const checkId = require('../../middlewares/checkId');
-// const { verifyAccessToken } = require('../../middlewares/verifyTokens');
 
 solveRouter.route('/').post(async (req, res) => {
   console.log(req.body)
@@ -11,8 +9,6 @@ solveRouter.route('/').post(async (req, res) => {
   try {
     const solve = await SolveServices.addSolve(wordId, userId,cardId);
     const stat = await StatsService.addStat(cardId, userId,cardId);
-    // console.log(solve);
-    // console.log(stat);
     res.status(201).json(solve);
   } catch (error) {
     console.log(error);

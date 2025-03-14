@@ -24,15 +24,14 @@ const [show, setShow] = useState(false);
         axiosInstance.post("/auth/login", formData).then((res) => {
           setUser({ status: "logged", data: res.data.user });
           setAccessToken(res.data.accessToken);
+        })
           navigate("/");
   })
   .catch((err) => {
     setShow(true);
     console.error(err);
         });
-        
       };
-
       
   return (
     <Container style={{

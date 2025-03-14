@@ -13,7 +13,7 @@ const WordsPage = ({user}) => {
 console.log(words)
 
   useEffect(() => {
-    axiosInstance.get(`/words/${cardId}`).then((res) => setWords(res.data))
+    axiosInstance.get(`/words/${cardId}`).then((res) => setWords(res.data)).catch(console.log)
   }, []);
 
   if(words.length===0){
