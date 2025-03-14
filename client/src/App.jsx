@@ -10,6 +10,7 @@ import UserPage from "./pages/UserPage/UserPage";
 import axios from "axios";
 import axiosInstance, { setAccessToken } from "./shared/libs/axiosInstance";
 import ProtecteRouter from "./shared/hocs/ProtecteRouter";
+import UserWordsPage from "./pages/UserWordsPage/UserWordsPage";
 
 function App() {
   const [user, setUser] = useState({ status: "logging", data: null });
@@ -17,9 +18,7 @@ function App() {
   const logoutHandler = async () => {
     axiosInstance.get("/auth/logout").then(() => {
       setUser({ status: "guest", data: null });
-      
     });
-
   };
   useEffect(() => {
     axiosInstance("/tokens/refresh")
@@ -38,23 +37,36 @@ function App() {
     <>
       <Routes>
         <Route element={<Layout user={user} logoutHandler={logoutHandler} />}>
- <Route element={<ProtecteRouter isAllowed={user.status === 'logged'} redirectTo={'/login'}/>}>
-          <Route path="/main" element={<CardsPage />} />
-           <Route path="/" element={<CardsPage />} />
-          <Route path="/cards/:cardId" element={<WordsPage user={user} />} />
-<Route path="/user" element={<UserPage user={user}/>} />
+          <Route
+            element={
+              <ProtecteRouter
+                isAllowed={user.status === "logged"}
+                redirectTo={"/login"}
+              />
+            }
+          >
+            <Route path="/main" element={<CardsPage />} />
+            <Route path="/" element={<CardsPage />} />
+            <Route path="/cards/:cardId" element={<WordsPage user={user} />} />
+            <Route path="/user" element={<UserPage user={user} />} />
+            <Route path="/user/words" element={<UserWordsPage user={user} />} />
           </Route>
-
-  <Route element={<ProtecteRouter isAllowed={user.status !== 'logged'} redirectTo={'/'}/>}>
-
-          <Route path="/signup" element={<SignUpPage setUser={setUser} user={user}/>} />
-          <Route path="/login" element={<LoginPage setUser={setUser} />} />
-
-      
+          <Route
+            element={
+              <ProtecteRouter
+                isAllowed={user.status !== "logged"}
+                redirectTo={"/"}
+              />
+            }
+          >
+            <Route
+              path="/signup"
+              element={<SignUpPage setUser={setUser} user={user} />}
+            />
+            <Route path="/login" element={<LoginPage setUser={setUser} />} />
           </Route>
-
-         </Route>
-    </Routes>
+        </Route>
+      </Routes>
     </>
   );
 }

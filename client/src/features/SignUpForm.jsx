@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router';
 import Container from 'react-bootstrap/esm/Container';
 
 export default function SignUpForm({setUser, user}) {
-  const 
   const navigate = useNavigate();
   const signUpHandler = (e) => {
     e.preventDefault();
