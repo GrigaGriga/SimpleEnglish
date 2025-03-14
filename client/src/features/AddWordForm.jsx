@@ -4,8 +4,11 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import axiosInstance from "../shared/libs/axiosInstance";
+import { useNavigate } from "react-router";
+import { Col, Row } from "react-bootstrap";
 
 export default function AddWordForm() {
+  const navigate = useNavigate();
   const [showErr, setShowErr] = useState(false);
   const [input, setInput] = useState({ cardTitle: null, url: null, eng: null, rus: null});
   const [show, setShow] = useState({ cardTitle: false, url: false });
@@ -100,7 +103,14 @@ export default function AddWordForm() {
       </InputGroup>
       
       {showErr ? <><br /><div style={{color: 'red'}}>Не все поля заполнены</div><br /></> : <br />}
-      <Button type="submit">Добавить слово</Button>
+      <Row>
+          <Col>
+          <Button type="submit">Добавить слово</Button>
+          </Col>
+          <Col >
+          <Button onClick={()=>navigate('/user/words')}>Добавленные слова</Button>
+          </Col>
+        </Row>
     </Form>
   );
 }

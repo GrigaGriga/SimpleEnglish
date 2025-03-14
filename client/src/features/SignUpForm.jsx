@@ -8,7 +8,9 @@ import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
 import { useNavigate } from 'react-router';
 import Container from 'react-bootstrap/esm/Container';
 
+
 export default function SignUpForm({setUser,user}) {
+
   const navigate = useNavigate();
   const [input,setInput] = useState({userName:'', email:'', password:'',repeatPassword:''})
    const [show, setShow] = useState(false);
