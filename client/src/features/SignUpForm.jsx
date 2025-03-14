@@ -8,7 +8,8 @@ import axiosInstance, { setAccessToken } from "../shared/libs/axiosInstance";
 import { useNavigate } from 'react-router';
 import Container from 'react-bootstrap/esm/Container';
 
-export default function SignUpForm({setUser}) {
+export default function SignUpForm({setUser, user}) {
+  const 
   const navigate = useNavigate();
   const signUpHandler = (e) => {
     e.preventDefault();
@@ -89,7 +90,7 @@ export default function SignUpForm({setUser}) {
               border: '2px solid black',
               color: 'black',
               transition: "filter 0.3s ease",
-            }} type="submit" onClick={()=> navigate('/')}> Зарегистрироваться</Button>
+            }} type="submit" onClick={user.status === "logged" ? ()=> navigate('/') : ()=> navigate('/signup')}> Зарегистрироваться</Button>
     </Form>
     </Container>
   </>

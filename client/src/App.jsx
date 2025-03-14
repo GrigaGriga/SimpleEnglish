@@ -47,7 +47,7 @@ function App() {
 
   <Route element={<ProtecteRouter isAllowed={user.status !== 'logged'} redirectTo={'/'}/>}>
 
-          <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
+          <Route path="/signup" element={<SignUpPage setUser={setUser} user={user}/>} />
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
 
       
