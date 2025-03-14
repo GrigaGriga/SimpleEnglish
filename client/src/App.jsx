@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router";
 import Layout from "./widgets/Layout/Layout";
-import CardsPage from "./pages/CardsPage";
+import CardsPage from "./pages/CardsPage/CardsPage";
 import WordsPage from "./pages/WordsPage/WordsPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
