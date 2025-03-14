@@ -17,8 +17,8 @@ export default function UserPage({ user }) {
     <>
       <Container>
         <Row>
-          <Col style={{ marginRight: "50px", marginBottom:'50px', backgroundColor: 'rgb(255, 201, 201)', borderRadius: '10px' }}>
-            <h2>Статистика</h2>
+          <Col style={{ marginRight: "50px", marginBottom:'50px', backgroundColor: 'rgb(255, 201, 201)', borderRadius: '10px', minHeight:'410px', minWidth:'400px' }}>
+            <h2 style={{marginBottom:'40px'}}>Статистика</h2>
             {stats.length > 0 ? (
               <>
                 {stats?.map((stat) => (
@@ -36,7 +36,7 @@ export default function UserPage({ user }) {
               </>
             )}
           </Col>
-          <Col style={{ marginLeft: "50px", backgroundColor: 'rgb(255, 201, 201)', borderRadius: '10px' }}>
+          <Col style={{ marginLeft: "50px", backgroundColor: 'rgb(255, 201, 201)', borderRadius: '10px', height:'410px', minWidth:'400px'}}>
             <h2>Добавление слов</h2>
             <br />
             <br />
