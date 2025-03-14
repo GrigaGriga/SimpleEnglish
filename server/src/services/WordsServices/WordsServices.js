@@ -12,9 +12,8 @@ class WordsService {
         }
         return card;
       }
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
     return card;
   }
@@ -30,7 +29,7 @@ class WordsService {
       });
       return newWord;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -47,18 +46,17 @@ class WordsService {
           solveUserId: userId,
         },
       });
-      const newWords = words.map((el) => el.get());
-      const newSolves = solves.map((el) => el.get());
+      const newWords = words?.map((el) => el.get());
+      const newSolves = solves?.map((el) => el.get());
       let newArr = [...newWords];
       for (let i = 0; i < newSolves.length; i++) {
         newArr = newArr.filter((word) => word.id !== newSolves[i].solveWordId);
       }
       return newArr;
     } catch (error) {
-      return error
+      return error;
     }
   }
-  
 }
 
 module.exports = WordsService;

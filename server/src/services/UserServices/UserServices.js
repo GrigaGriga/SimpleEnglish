@@ -6,7 +6,7 @@ class UserService {
       const wordsOfUser = await Word.findAll({
         where: { wordUserId: userId },
       });
-      return wordsOfUser.map((el) => el.get());
+      return wordsOfUser?.map((el) => el.get());
     } catch (error) {
       console.log(error);
     }

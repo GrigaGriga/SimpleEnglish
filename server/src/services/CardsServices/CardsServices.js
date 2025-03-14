@@ -3,7 +3,7 @@ class CardsServices {
   static async getAllCards() {
     try {
       const cards = await Card.findAll();
-      const cardsData = cards.map(card => card.get());
+      const cardsData = cards?.map(card => card.get());
       return cardsData;
     } catch (error) {
         console.error("Ошибка при получении карточек сервис:", error);

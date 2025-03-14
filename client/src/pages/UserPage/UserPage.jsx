@@ -21,7 +21,7 @@ export default function UserPage({ user }) {
             <h2>Статистика</h2>
             {stats.length > 0 ? (
               <>
-                {stats.map((stat) => (
+                {stats?.map((stat) => (
                   <Stats
                     style={{ marginRight: "0px" }}
                     key={stat.id}

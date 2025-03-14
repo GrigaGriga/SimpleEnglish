@@ -23,7 +23,7 @@ export default function CardsPage() {
       </Row>
 
       <Row className="g-4">
-        {cards.map((card) => (
+        {cards?.map((card) => (
           <Col
             key={card.id}
             lg={4}  // На экранах шириной 1400px и больше карточки будут занимать 4 колонки

@@ -37,7 +37,7 @@ console.log(words)
     <>
       <Container style={{marginTop:'100px'}}>
         <Row>
-          {words.map((el) => (
+          {words?.map((el) => (
             <Col style={{marginBottom: '20px',}} key={el.id}>
               <OneWord word={el} deleteFromUserWord={deleteFromUserWord}></OneWord>
             </Col>

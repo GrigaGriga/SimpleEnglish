@@ -16,7 +16,7 @@ export default function UserWordsPage({ user }) {
         <Row>
           {words.length > 0 ? (
             <>
-              {words.map((el) => (
+              {words?.map((el) => (
                 <Col style={{ marginBottom: "20px" }} key={el.id}>
                   <OneUserWord
                     key={el.id}

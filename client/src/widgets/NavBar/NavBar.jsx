@@ -47,7 +47,7 @@ export default function NavBar({ logoutHandler, user }) {
             onMouseEnter={(e) => e.target.style.filter = 'brightness(1.2)'}
             onMouseLeave={(e) => e.target.style.filter = 'brightness(1)'}
           >
-            {user.status === "logged" ? user.data.userName : "Guest"}
+            {user.status === "logged" ? user?.data?.userName : "Guest"}
           </button>
         </div>
         <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
