@@ -9,10 +9,10 @@ export default function Stats({ stat }) {
   const perscent = Math.round((stat.countWords / stat.Card.Words.length) * 100);
   return (
     <>
-      <Container style={{ minWwidth: "300px", height: "10px" }}>
+      <Container style={{ padding: '0px',minWwidth: "300px", height: "40px" }}>
         <Row style={{ width: "100%" }}>
           <Col style={{ width: "200px" }}>
-            <div style={{ textAlign: "center" }}>{stat.Card.title}</div>
+            <div style={{ textAlign: "center",fontSize: '22px' }}>{stat.Card.title}</div>
           </Col>
           <Col style={{ width: "400px" }}>
             <>{perscent} %</>
