@@ -36,7 +36,6 @@ export default function SignUpForm({setUser,user}) {
       setUser({ status: "logged", data: res.data.userName });
       setAccessToken(res.data.accessToken);
       location.assign('/')
-    }).catch(console.log);
     });
     if (!pattern.test(input.email)) {
       setShow(true)
